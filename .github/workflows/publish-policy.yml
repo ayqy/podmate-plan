@@ -1,0 +1,43 @@
+name: Publish managed policy
+on:
+  push:
+    branches: [main]
+    paths:
+      - plan-config.json
+      - scripts/refresh_policy.py
+      - .github/workflows/publish-policy.yml
+  schedule:
+    - cron: "17 0 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: podmate-policy-pages
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - name: Refresh short-lived policy
+        run: python3 scripts/refresh_policy.py
+      - name: Commit current revision
+        run: |
+          if ! git diff --quiet -- docs/managed-policy.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add docs/managed-policy.json
+            git commit -m "Refresh managed policy validity"
+            git push
+          fi
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+      - id: deployment
+        uses: actions/deploy-pages@v4

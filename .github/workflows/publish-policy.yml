@@ -5,6 +5,13 @@ on:
     paths:
       - plan-config.json
       - scripts/refresh_policy.py
+      - scripts/build_product_pages.py
+      - docs/privacy-policy.json
+      - docs/privacy.html
+      - docs/support.html
+      - docs/third-party-notices.txt
+      - docs/lame-source.zip
+      - docs/lame-source-manifest.json
       - .github/workflows/publish-policy.yml
   schedule:
     - cron: "17 0 * * *"
@@ -27,6 +34,8 @@ jobs:
       - uses: actions/configure-pages@v5
       - name: Refresh short-lived policy
         run: python3 scripts/refresh_policy.py
+      - name: Verify product privacy and license pages
+        run: python3 scripts/build_product_pages.py --check
       - name: Commit current revision
         run: |
           if ! git diff --quiet -- docs/managed-policy.json; then

@@ -1,6 +1,6 @@
 # Podmate 受管套餐策略
 
-这个公开仓库只托管 Podmate 的非敏感套餐参数。发布地址是
+这个公开仓库托管 Podmate 的非敏感套餐参数、隐私与支持说明和第三方库许可材料。策略发布地址是
 `https://ayqy.github.io/podmate-plan/managed-policy.json`。
 
 `plan-config.json` 是运营输入，`scripts/refresh_policy.py` 按 UTC 时间产生最长七天有效的
@@ -10,3 +10,9 @@
 
 额度以 USD 的十亿分之一为单位，是用户自带阿里云百炼密钥的本机参考请求上限，
 不是 Podmate 储值、服务商余额、实际成本或跨设备结算。
+
+隐私说明：https://ayqy.github.io/podmate-plan/privacy.html
+
+产品支持与第三方许可：https://ayqy.github.io/podmate-plan/support.html
+
+`docs/privacy-policy.json` 与应用打包政策同源；修改后用 `python3 scripts/build_product_pages.py` 生成页面，再以 `--check` 校验。只发布非敏感说明及已集成 LGPL 库的源码，不包含私有应用仓库、用户数据或凭据。既有每日策略刷新与策略数据合同保持。

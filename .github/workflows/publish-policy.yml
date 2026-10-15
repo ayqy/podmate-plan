@@ -12,6 +12,8 @@ on:
       - docs/third-party-notices.txt
       - docs/lame-source.zip
       - docs/lame-source-manifest.json
+      - docs/relinking.html
+      - docs/relinking-manifest.json
       - .github/workflows/publish-policy.yml
   schedule:
     - cron: "17 0 * * *"

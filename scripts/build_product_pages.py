@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import html
 import json
+import re
 from pathlib import Path
 import zipfile
 
@@ -45,7 +46,37 @@ def outputs():
 <h2>隐私与原件</h2><p>项目默认保存在本机；可选上传和远端副本边界见<a href="privacy.html">隐私说明</a>。不要为了排查问题删除唯一原件或备份。</p>
 <h2>第三方许可与源码</h2><p>MP3 编码使用 LAME。<a href="third-party-notices.txt">许可与上游授权全文</a>、<a href="lame-source.zip">当前集成的 LAME 库源码</a>及<a href="lame-source-manifest.json">源码摘要清单</a>可直接下载。</p>
 <p>若需要替换所用 LAME 库或获取重链接资料，请通过支持渠道联系维护者。</p>'''
-    return {'privacy.html': document(policy['title'], ''.join(parts), digest), 'support.html': document('Podmate 产品支持', support, digest)}
+    support = support.replace(
+        '<p>若需要替换所用 LAME 库或获取重链接资料，请通过支持渠道联系维护者。</p>',
+        '<p><a href="relinking.html">下载对应版本的 LAME 替换重链接材料</a>，包括库源码、许可、应用对象、资源和构建说明。</p>')
+    relinking = json.loads((DOCS / 'relinking-manifest.json').read_text())
+    assert relinking['bundle_id'] == 'com.ayqy.podmate'
+    assert relinking['version'] == '1.0.0' and relinking['build'] == '2'
+    assert re.fullmatch('[a-f0-9]{40}', relinking['source_commit'])
+    material = ['<h1>LAME 源码与替换材料</h1><p>Podmate 1.0.0（2）</p>',
+        '<p>你可以依据 LGPL 复制、修改和重新链接 LAME。Podmate 允许个人使用的库修改，以及为调试这些库修改而对应用进行逆向工程。</p>',
+        '<p>下面的材料包括此版本的 LAME 源码及许可、实际交付的非库对象、必要资源、编译链接脚本和逐文件摘要；不含应用私有源码、用户项目或 Apple 签名凭据。</p>']
+    platforms = set()
+    for package in relinking['packages']:
+        assert package['platform'] in {'iphoneos', 'iphonesimulator'}
+        assert package['architecture'] in {'arm64', 'x86_64'}
+        assert package['url'].startswith('https://github.com/ayqy/podmate-plan/releases/download/lame-relink-1.0.0-2/')
+        assert re.fullmatch('[a-f0-9]{64}', package['sha256'])
+        platforms.add(package['platform'])
+        label = 'iOS 设备' if package['platform'] == 'iphoneos' else 'iOS 模拟器'
+        material.append(f'<h2>{label} · {html.escape(package["architecture"])}</h2>'
+            f'<p><a href="{html.escape(package["url"], quote=True)}">下载重新链接包</a> · {package["size"] / 1048576:.1f} MB</p>'
+            f'<p>SHA-256：<code>{package["sha256"]}</code></p>')
+    assert platforms == {'iphoneos', 'iphonesimulator'}
+    material.extend([
+        '<h2>使用材料</h2><p>需要与包内架构匹配的 Mac、Xcode 26.5、对应 Apple SDK 与 Python 3。先按包内 README 核验，再修改 LAME 并运行编译链接脚本。</p>',
+        '<p>重新链接会使原 App Store 签名失效。模拟器包使用临时本地签名；设备包需要你自己的开发签名与描述文件。平台安装和 StoreKit 条件仍适用。</p>',
+        '<p>非库对象与资源用于重新链接本应用，不授权其他应用源码。LAME 的授权范围按包内 COPYING 与 LICENSE 原文执行。</p>',
+        f'<p>对应应用源码提交：<code>{relinking["source_commit"]}</code></p>',
+        '<p><a href="relinking-manifest.json">下载摘要清单</a> · <a href="third-party-notices.txt">许可全文</a></p>'])
+    return {'privacy.html': document(policy['title'], ''.join(parts), digest),
+            'support.html': document('Podmate 产品支持', support, digest),
+            'relinking.html': document('Podmate LAME 替换材料', ''.join(material), digest)}
 
 def main():
     parser = argparse.ArgumentParser()

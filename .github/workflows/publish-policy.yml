@@ -9,6 +9,7 @@ on:
       - docs/privacy-policy.json
       - docs/privacy.html
       - docs/support.html
+      - docs/support-contact.json
       - docs/third-party-notices.txt
       - docs/lame-source.zip
       - docs/lame-source-manifest.json

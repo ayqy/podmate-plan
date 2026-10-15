@@ -46,6 +46,11 @@ def outputs():
 <h2>隐私与原件</h2><p>项目默认保存在本机；可选上传和远端副本边界见<a href="privacy.html">隐私说明</a>。不要为了排查问题删除唯一原件或备份。</p>
 <h2>第三方许可与源码</h2><p>MP3 编码使用 LAME。<a href="third-party-notices.txt">许可与上游授权全文</a>、<a href="lame-source.zip">当前集成的 LAME 库源码</a>及<a href="lame-source-manifest.json">源码摘要清单</a>可直接下载。</p>
 <p>若需要替换所用 LAME 库或获取重链接资料，请通过支持渠道联系维护者。</p>'''
+    contact = json.loads((DOCS / 'support-contact.json').read_text())
+    assert set(contact) == {'email'} and re.fullmatch(r'[^\s<>@]+@[^\s<>@]+\.[^\s<>@]+', contact['email'])
+    address = html.escape(contact['email'], quote=True)
+    support = support.replace('<h2>提交问题</h2>',
+        f'<h2>联系支持</h2><p>产品使用与隐私问题请发送至 <a href="mailto:{address}">{address}</a>。请勿发送密码、API Key或私人原声。</p>\n<h2>提交问题</h2>')
     support = support.replace(
         '<p>若需要替换所用 LAME 库或获取重链接资料，请通过支持渠道联系维护者。</p>',
         '<p><a href="relinking.html">下载对应版本的 LAME 替换重链接材料</a>，包括库源码、许可、应用对象、资源和构建说明。</p>')

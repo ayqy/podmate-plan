@@ -56,16 +56,16 @@ def outputs():
         '<p><a href="relinking.html">下载对应版本的 LAME 替换重链接材料</a>，包括库源码、许可、应用对象、资源和构建说明。</p>')
     relinking = json.loads((DOCS / 'relinking-manifest.json').read_text())
     assert relinking['bundle_id'] == 'com.ayqy.podmate'
-    assert relinking['version'] == '1.0.0' and relinking['build'] == '2'
+    assert relinking['version'] == '1.0.0' and re.fullmatch('[1-9][0-9]*', relinking['build'])
     assert re.fullmatch('[a-f0-9]{40}', relinking['source_commit'])
-    material = ['<h1>LAME 源码与替换材料</h1><p>Podmate 1.0.0（2）</p>',
+    material = [f'<h1>LAME 源码与替换材料</h1><p>Podmate {relinking["version"]}（{relinking["build"]}）</p>',
         '<p>你可以依据 LGPL 复制、修改和重新链接 LAME。Podmate 允许个人使用的库修改，以及为调试这些库修改而对应用进行逆向工程。</p>',
         '<p>下面的材料包括此版本的 LAME 源码及许可、实际交付的非库对象、必要资源、编译链接脚本和逐文件摘要；不含应用私有源码、用户项目或 Apple 签名凭据。</p>']
     platforms = set()
     for package in relinking['packages']:
         assert package['platform'] in {'iphoneos', 'iphonesimulator'}
         assert package['architecture'] in {'arm64', 'x86_64'}
-        assert package['url'].startswith('https://github.com/ayqy/podmate-plan/releases/download/lame-relink-1.0.0-2/')
+        assert package['url'].startswith(f'https://github.com/ayqy/podmate-plan/releases/download/lame-relink-{relinking["version"]}-{relinking["build"]}/')
         assert re.fullmatch('[a-f0-9]{64}', package['sha256'])
         platforms.add(package['platform'])
         label = 'iOS 设备' if package['platform'] == 'iphoneos' else 'iOS 模拟器'

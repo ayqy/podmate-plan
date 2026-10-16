@@ -7,6 +7,8 @@ on:
       - scripts/refresh_policy.py
       - scripts/build_product_pages.py
       - docs/privacy-policy.json
+      - docs/privacy-policy-en.json
+      - 'docs/*-en.html'
       - docs/privacy.html
       - docs/support.html
       - docs/support-contact.json

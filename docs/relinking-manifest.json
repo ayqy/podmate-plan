@@ -2,22 +2,25 @@
   "schema_version": 1,
   "bundle_id": "com.ayqy.podmate",
   "version": "1.0.0",
-  "build": "4",
-  "source_commit": "02749bae53386fb8682e989fe91329d590544200",
+  "build": "5",
+  "source_commit": "f06e240489aed99e1e82e4cfa9bf3bc197775395",
+  "production_fingerprint": "1cfa4edae55629ddd586f7a6bd8c34476ef41dc491244213856f83449194dd3a",
   "packages": [
     {
       "platform": "iphoneos",
       "architecture": "arm64",
-      "sha256": "2a8beb9bc31ed365e787d0a44b4800d845088a6dbe5d8f22cbffa1922f028df1",
-      "size": 8672631,
-      "url": "https://github.com/ayqy/podmate-plan/releases/download/lame-relink-1.0.0-4/Podmate-1.0.0-4-LAME-iphoneos-arm64.zip"
+      "sha256": "d9b1904d040156f28389acd0c364dce2ef9506f363add707b4967eb6a1c9d6b2",
+      "size": 9065785,
+      "source_commit": "9d6d5f7f317ecc750aa23577b8a3b643afe2daba",
+      "url": "https://github.com/ayqy/podmate-plan/releases/download/lame-relink-1.0.0-5/Podmate-1.0.0-5-LAME-iphoneos-arm64.zip"
     },
     {
       "platform": "iphonesimulator",
       "architecture": "x86_64",
-      "sha256": "0044c2ea753c431daf60f567b6ef2d9fb54e96d8363f4797831f8b878a094d3f",
-      "size": 9415345,
-      "url": "https://github.com/ayqy/podmate-plan/releases/download/lame-relink-1.0.0-4/Podmate-1.0.0-4-LAME-iphonesimulator-x86_64.zip"
+      "sha256": "bc08a45e649c20d81c59b20bf367000e553e53dbfd5f5098b8cd3486718081b2",
+      "size": 9692004,
+      "source_commit": "d933ec47c30a51437daf4ae34fa46fb9c8e9bf93",
+      "url": "https://github.com/ayqy/podmate-plan/releases/download/lame-relink-1.0.0-5/Podmate-1.0.0-5-LAME-iphonesimulator-x86_64.zip"
     }
   ]
 }

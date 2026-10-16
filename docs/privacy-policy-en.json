@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "revision": "2026-10-15",
+  "title": "Podmate Privacy Statement",
+  "summary": "Projects stay on your device by default. You choose what to send to the cloud.",
+  "sections": [
+    {
+      "id": "local",
+      "title": "Save on this device by default",
+      "paragraphs": [
+        "Original article text, audio recordings, videos, clips, practice feedback, and generated works are saved on this device by default. Local recording, sound analysis and local dubbing do not need to upload content. Podmate doesn't have its own content accounts or automatic cross-device syncing."
+      ]
+    },
+    {
+      "id": "cloud",
+      "title": "Cloud features of your choice",
+      "paragraphs": [
+        "When using Alibaba Cloud to generate questions, conversations, questioning, dubbing, recognition, or gesture analysis, the corresponding text, selected original recording, or video sample frames will be sent to the model service you configured. Confirmation before requesting will describe scope and cost; simply viewing the project, privacy statement, or native feedback will not initiate a request for these models.",
+        "Your API Key is used for model service authentication and is saved in the device Keychain. It is not added to projects, engineering packages or shared files. The service provider may process and retain requests in accordance with the terms applicable to your account, please understand its privacy and data retention policies before use."
+      ]
+    },
+    {
+      "id": "backup",
+      "title": "Backup and share",
+      "paragraphs": [
+        "When WebDAV is actively enabled, a backup of the original recording or a project you have enabled individually is sent to a server of your choice; content may include titles, question cards, originals, and transcripts. Server accounts, retention and deletion are managed between you and the server provider.",
+        "System sharing only sends the works or project files you selected. Project packages may contain original audio, video and text; please check content, rights and recipients before sharing."
+      ]
+    },
+    {
+      "id": "permissions",
+      "title": "Permissions are controlled by you",
+      "paragraphs": [
+        "The microphone is used for active recording, practice, or voice clipping; the camera is for active video practice only. Files are imported through the system selector and do not require reading of the entire album. You can turn off the permission in the system settings; you can still listen to the original recording if you already have it."
+      ]
+    },
+    {
+      "id": "network",
+      "title": "Internet and usage records",
+      "paragraphs": [
+        "Reading public package policies, viewing online help, or using Apple purchase-related functions will require you to connect to the Internet; the provider may receive basic network information such as IP addresses. Podmate does not integrate advertising, cross-application tracking or behavioral analysis services.",
+        "This machine requests the duration, usage and cost reference to help check consumption, and cannot replace the service provider's real bill; official charges for active verification will be marked separately. Apple transactions and service provider accounts are handled separately by their platforms.",
+        "On the cost page, you can actively read the OpenAI official project fee, or modify the hard limit of the service provider's project after confirmation. This will send the project ID, query range, quota settings and the Admin API Key used on this page to OpenAI; the administrator key will not be written to the project, backup or log, and will be cleared when leaving the page. The verified expense snapshot can be saved locally; please check whether accounting information is included before sharing or backing up the project."
+      ]
+    },
+    {
+      "id": "retention",
+      "title": "Retention, deletion and withdrawal",
+      "paragraphs": [
+        "Projects and originals are retained until you actively delete them. Deleting an item will clear its local content and details, but to prevent deleting the item from resetting the quota, the minimum monthly usage index without content will be retained.",
+        "Deleting the API Key or turning off uploading will stop subsequent related calls; saved works will not be deleted, nor will sent requests be withdrawn. Deleting the local project does not delete the WebDAV remote copy. For data that has been received by the service provider, please use its account management or contact its support; local operation cannot guarantee that the other party will delete it.",
+        "Device backups may contain app data, the retention and deletion of which is controlled by system backup settings. Please keep your own project files and server backups."
+      ]
+    },
+    {
+      "id": "support",
+      "title": "Contact and changes",
+      "paragraphs": [
+        "Podmate is maintained by GitHub user ayqy. Privacy, usage, or third-party licensing questions can be submitted through the product support page. Please do not provide API keys, passwords, private soundtracks, or unauthorized content in public questions.",
+        "This description is updated as data flow changes; confirmation will still be requested when new cloud delivery ranges are involved."
+      ]
+    }
+  ],
+  "references": [
+    {
+      "id": "aliyun",
+      "title": "Alibaba Cloud Services and Privacy Information",
+      "url": "https://www.aliyun.com/"
+    },
+    {
+      "id": "apple",
+      "title": "Apple Privacy Policy",
+      "url": "https://www.apple.com/legal/privacy/"
+    },
+    {
+      "id": "github",
+      "title": "GitHub Privacy Statement",
+      "url": "https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
+    },
+    {
+      "id": "openai",
+      "title": "OpenAI Privacy Policy",
+      "url": "https://openai.com/policies/privacy-policy/"
+    }
+  ]
+}

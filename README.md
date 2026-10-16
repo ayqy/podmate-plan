@@ -15,4 +15,11 @@
 
 产品支持与第三方许可：https://ayqy.github.io/podmate-plan/support.html
 
+English privacy and support: https://ayqy.github.io/podmate-plan/privacy-en.html and
+https://ayqy.github.io/podmate-plan/support-en.html .
+
+构建 1.0.0（5）的 LAME 对应源码与重链接材料：
+https://ayqy.github.io/podmate-plan/relinking.html ，英文说明见
+https://ayqy.github.io/podmate-plan/relinking-en.html 。材料公开不表示应用已在 App Store 上架。
+
 `docs/privacy-policy.json` 与应用打包政策同源；修改后用 `python3 scripts/build_product_pages.py` 生成页面，再以 `--check` 校验。只发布非敏感说明及已集成 LGPL 库的源码，不包含私有应用仓库、用户数据或凭据。既有每日策略刷新与策略数据合同保持。

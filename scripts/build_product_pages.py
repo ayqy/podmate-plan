@@ -10,6 +10,8 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / 'docs'
+STORE_NAME = 'MeowPodcaster'
+INSTALLED_ENGLISH_NAME = 'MeowPodcast'
 
 def document(title, body, digest, locale='zh-Hans', page='privacy'):
     english = locale == 'en'
@@ -96,7 +98,9 @@ def outputs():
     assert translated['revision'] == policy['revision']
     assert [x['id'] for x in translated['sections']] == [x['id'] for x in policy['sections']]
     assert [x['url'] for x in translated['references']] == [x['url'] for x in policy['references']]
-    en_parts = [f'<h1>{html.escape(translated["title"])}</h1>',
+    en_privacy_title = f'{STORE_NAME} Privacy Statement'
+    en_parts = [f'<h1>{html.escape(en_privacy_title)}</h1>',
+                f'<p>{STORE_NAME} is the App Store name of {INSTALLED_ENGLISH_NAME} (project name: Podmate). This statement covers the same app and its data practices.</p>',
                 f'<p>{html.escape(translated["summary"])}</p>',
                 f'<p>Updated: {html.escape(translated["revision"])}</p>']
     for section in translated['sections']:
@@ -105,14 +109,14 @@ def outputs():
     en_parts.append('<h2>Related information</h2><p><a href="third-party-notices.txt">Third-party licenses</a></p>')
     en_parts.extend(f'<p><a href="{html.escape(x["url"], quote=True)}">{html.escape(x["title"])}</a></p>'
                     for x in translated['references'])
-    en_support = f'''<h1>MeowPodcast Support</h1>
-<p>MeowPodcast (project name: Podmate) helps you create interviews and article podcasts, and practise speaking. App availability is determined by its App Store listing.</p>
+    en_support = f'''<h1>{STORE_NAME} Support</h1>
+<p>{STORE_NAME} (on-device name: {INSTALLED_ENGLISH_NAME}; project name: Podmate) helps you create interviews and article podcasts, and practise speaking. App availability is determined by its App Store listing.</p>
 <h2>Language and on-device narration</h2><p>Choose System, English or 简体中文 in Settings. Your explicit choice is saved. On-device article narration currently uses Chinese voices; changing the interface language does not translate your original text. Finished podcasts can be shared as MP3 or WAV.</p>
 <h2>Contact support</h2><p>For product or privacy questions, email <a href="mailto:{address}">{address}</a>. Do not send passwords, API keys or private recordings.</p>
 <p>You can also use the <a href="https://github.com/ayqy/podmate-plan/issues">public issue tracker</a> to contact maintainer ayqy. Include the app version, device, OS version, steps and a description without personal information. Public issues are visible to everyone; remove personal information from screenshots.</p>
 <h2>Privacy and originals</h2><p>Projects are stored on your device by default. Optional uploads and remote copies are explained in the <a href="privacy-en.html">privacy policy</a>. Keep your only originals and backups when troubleshooting.</p>
 <h2>Third-party licenses and source</h2><p>MP3 encoding uses LAME. Download the <a href="third-party-notices.txt">license notices</a>, <a href="lame-source.zip">integrated LAME source</a> and <a href="relinking-en.html">version-matched relinking materials</a>. These materials include library source, licenses, application objects, resources and build instructions.</p>'''
-    en_material = [f'<h1>LAME source and relinking materials</h1><p>MeowPodcast {relinking["version"]} (build {relinking["build"]})</p>',
+    en_material = [f'<h1>LAME source and relinking materials</h1><p>{STORE_NAME} {relinking["version"]} (build {relinking["build"]}), shown as {INSTALLED_ENGLISH_NAME} on your device</p>',
         '<p>You may copy, modify and relink LAME under the LGPL. Podmate permits library modifications for your own use and reverse engineering to debug those modifications.</p>',
         '<p>The packages contain corresponding LAME source and licenses, actual non-library application objects, required resources, build scripts and file digests. They do not contain private application source, user projects or Apple signing credentials.</p>']
     for package in relinking['packages']:
@@ -125,9 +129,9 @@ def outputs():
         f'<p>Application archive source revision: <code>{relinking["source_commit"]}</code>. Individual package manifests record their packaging revisions.</p>',
         '<p><a href="relinking-manifest.json">Download digest manifest</a> · <a href="third-party-notices.txt">License notices</a></p>'])
     en_digest = hashlib.sha256(translated_raw).hexdigest()
-    result.update({'privacy-en.html': document(translated['title'], ''.join(en_parts), en_digest, 'en'),
-                   'support-en.html': document('MeowPodcast Support', en_support, digest, 'en', 'support'),
-                   'relinking-en.html': document('MeowPodcast LAME relinking materials', ''.join(en_material), digest, 'en', 'relinking')})
+    result.update({'privacy-en.html': document(en_privacy_title, ''.join(en_parts), en_digest, 'en'),
+                   'support-en.html': document(f'{STORE_NAME} Support', en_support, digest, 'en', 'support'),
+                   'relinking-en.html': document(f'{STORE_NAME} LAME relinking materials', ''.join(en_material), digest, 'en', 'relinking')})
     return result
 
 def main():
